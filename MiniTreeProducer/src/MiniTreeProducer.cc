@@ -1208,6 +1208,11 @@ void MiniTreeProducer::fillGenEventInfo(edm::Event& iEvent,
   }
 
   //********************************************************
+  // Info about signal ID
+  //********************************************************
+  evt->mc.processID = genEventInfo->pdf()->signalProcessID;
+
+  //********************************************************
   // Calculate PDF weight 
   //********************************************************
   evt->mc.partonFlavor.first  = genEventInfo->pdf()->id.first;
@@ -1216,8 +1221,10 @@ void MiniTreeProducer::fillGenEventInfo(edm::Event& iEvent,
   evt->mc.x.second            = genEventInfo->pdf()->x.second;
   evt->mc.Q_scale             = genEventInfo->pdf()->scalePDF;
 
-  evt->mc.xpdf.first          = genEventInfo->pdf()->xPDF.first;
-  evt->mc.xpdf.second         = genEventInfo->pdf()->xPDF.second;
+  // The two following variables are not available
+  // because LHE files do not contain xPDF values
+  //  evt->mc.xpdf.first          = genEventInfo->pdf()->xPDF.first;
+  //  evt->mc.xpdf.second         = genEventInfo->pdf()->xPDF.second;
 
   //********************************************************
   // Extract ptHat
