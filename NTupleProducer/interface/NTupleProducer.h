@@ -15,8 +15,8 @@
 #include <TH1F.h>
 
 //----------------- NTuple producer
-#include "NTuple/NTupleProducer/interface/SkimTopDiLepton.h"
-#include "NTuple/NTupleProducer/interface/FillNTuple.h"
+#include "IPHCProducer/NTupleProducer/interface/SkimTopDiLepton.h"
+#include "IPHCProducer/NTupleProducer/interface/FillNTuple.h"
 
 //----------------- cmssw includes
 #include "FWCore/Framework/interface/Frameworkfwd.h"

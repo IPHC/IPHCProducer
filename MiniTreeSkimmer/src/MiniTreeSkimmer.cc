@@ -1,6 +1,4 @@
-
-
-#include "MiniTree/MiniTreeSkimmer/interface/MiniTreeSkimmer.h"
+#include "IPHCProducer/MiniTreeSkimmer/interface/MiniTreeSkimmer.h"
 
 
 // ----------------------------------------------------------------------------

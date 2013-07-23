@@ -137,7 +137,7 @@ import sys
 ###############################
 
 ### The Strasbourg's ntupler
-process.load("MiniTree.MiniTreeProducer.simpleEleIdSequence_cff")
+process.load("IPHCProducer.MiniTreeProducer.simpleEleIdSequence_cff")
 process.MiniTreeProduction = cms.EDProducer('MiniTreeProducer',
 # ---------------------- General info -------------------------------
          verbose             = cms.uint32(0),   #0: nothing - >1 

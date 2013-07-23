@@ -37,7 +37,7 @@
 #include "DataFormats/PatCandidates/interface/Jet.h"
 #include "DataFormats/Common/interface/MergeableCounter.h"
 
-#include "MiniTree/MiniTreeSkimmer/interface/ConfigSkimming.h" 
+#include "IPHCProducer/MiniTreeSkimmer/interface/ConfigSkimming.h" 
 
 using namespace std;
 

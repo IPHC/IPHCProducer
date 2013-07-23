@@ -1,5 +1,5 @@
-#include "MiniTree/MiniTreeProducer/interface/MiniTreeProducer.h"
-#include "MiniTree/MiniTreeProducer/interface/MonteCarloOrigin.h"
+#include "IPHCProducer/MiniTreeProducer/interface/MiniTreeProducer.h"
+#include "IPHCProducer/MiniTreeProducer/interface/MonteCarloOrigin.h"
 #include "IPHCDataFormat/MTFormat/interface/MTTransient.h"
 
 #define DEBUG_MSG cout << "DEBUG (" << __FILE__ << ", l." << __LINE__ << ") "

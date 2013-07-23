@@ -1,4 +1,4 @@
-#include "NTuple/NTupleProducer/interface/NTupleProducer.h"
+#include "IPHCProducer/NTupleProducer/interface/NTupleProducer.h"
 #include "IPHCDataFormat/MTFormat/interface/MTTransient.h"
 #include "IPHCDataFormat/NTFormat/interface/NTTransient.h"
 
