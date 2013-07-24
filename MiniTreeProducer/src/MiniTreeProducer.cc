@@ -1210,7 +1210,7 @@ void MiniTreeProducer::fillGenEventInfo(edm::Event& iEvent,
   //********************************************************
   // Info about signal ID
   //********************************************************
-  evt->mc.processID = genEventInfo->pdf()->signalProcessID;
+  evt->mc.processID = genEventInfo->signalProcessID();
 
   //********************************************************
   // Calculate PDF weight 
