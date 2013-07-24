@@ -116,7 +116,7 @@ typedef math::XYZPoint Point;
 #include "PhysicsTools/SelectorUtils/interface/PFJetIDSelectionFunctor.h"
 #include "DataFormats/HLTReco/interface/TriggerEvent.h"
 #include "DataFormats/HepMCCandidate/interface/PdfInfo.h"
-#include "MiniTree/MiniTreeProducer/interface/ConfigType.h" 
+#include "IPHCProducer/MiniTreeProducer/interface/ConfigType.h" 
 
 //--------------------ROOT includes
 #include "TFile.h"
