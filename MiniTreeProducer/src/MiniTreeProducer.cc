@@ -828,15 +828,15 @@ void MiniTreeProducer::produce(edm::Event& iEvent,
 
 
 
-// ----------------------------------------------------------------------------
-//        ___                         _       _           ___      
-//       (  _`\                      ( )_    (_)        /'___)     
-//       | (_(_) _   _    __    ___  | ,_)   | |  ___  | (__   _   
-//       |  _)_ ( ) ( ) /'__`\/' _ `\| |     | |/' _ `\| ,__)/'_`\ 
-//       | (_( )| \_/ |(  ___/| ( ) || |_    | || ( ) || |  ( (_) )
-//       (____/'`\___/'`\____)(_) (_)`\__)   (_)(_) (_)(_)  `\___/'
-//       
-// ----------------------------------------------------------------------------
+/* ----------------------------------------------------------------------------
+          ___                         _       _           ___      
+         (  _`\                      ( )_    (_)        /'___)     
+         | (_(_) _   _    __    ___  | ,_)   | |  ___  | (__   _   
+         |  _)_ ( ) ( ) /'__`\/' _ `\| |     | |/' _ `\| ,__)/'_`\ 
+         | (_( )| \_/ |(  ___/| ( ) || |_    | || ( ) || |  ( (_) )
+         (____/'`\___/'`\____)(_) (_)`\__)   (_)(_) (_)(_)  `\___/'
+         
+   ---------------------------------------------------------------------------- */
 void MiniTreeProducer::fillGeneralInfo(edm::Event& iEvent, 
                                        const edm::EventSetup& iSetup,
                                        std::auto_ptr<IPHCTree::MTEvent>& evt)
@@ -847,17 +847,17 @@ void MiniTreeProducer::fillGeneralInfo(edm::Event& iEvent,
 }
 
 
-// ----------------------------------------------------------------------------
-//                _____                                   
-//               (_   _)     _                            
-//                 | | _ __ (_)   __     __     __   _ __ 
-//                 | |( '__)| | /'_ `\ /'_ `\ /'__`\( '__)
-//                 | || |   | |( (_) |( (_) |(  ___/| |   
-//                 (_)(_)   (_)`\__  |`\__  |`\____)(_)   
-//                             ( )_) |( )_) |             
-//                              \___/' \___/'   
-//
-// ----------------------------------------------------------------------------
+/* ----------------------------------------------------------------------------
+                  _____                                   
+                 (_   _)     _                            
+                   | | _ __ (_)   __     __     __   _ __ 
+                   | |( '__)| | /'_ `\ /'_ `\ /'__`\( '__)
+                   | || |   | |( (_) |( (_) |(  ___/| |   
+                   (_)(_)   (_)`\__  |`\__  |`\____)(_)   
+                               ( )_) |( )_) |             
+                                \___/' \___/'   
+
+   ---------------------------------------------------------------------------- */
 void MiniTreeProducer::fillTriggerInfo(edm::Event& iEvent, 
                                        const edm::EventSetup& iSetup,
                                        std::auto_ptr<IPHCTree::MTEvent>& evt,
@@ -905,6 +905,8 @@ void MiniTreeProducer::fillTriggerInfo(edm::Event& iEvent,
   // Save trigger bits and prescales
   evt->trigger.FillTrigger(output); 
 
+  // I comment this part because it is not used for anything
+  /*
   float match_pTHLTElectron15 = -1.;
 
   // get all trigger objects corresponding to this module.
@@ -916,18 +918,19 @@ void MiniTreeProducer::fillTriggerInfo(edm::Event& iEvent,
   {
     if ((*iObject)->pt() >= 15) match_pTHLTElectron15 = (*iObject)->pt();
   }
+  */
 }
 
 
-// ----------------------------------------------------------------------------
-//             _   _               _                          
-//            ( ) ( )             ( )_  _                     
-//            | | | |   __   _ __ | ,_)(_)   ___    __    ___ 
-//            | | | | /'__`\( '__)| |  | | /'___) /'__`\/',__)
-//            | \_/ |(  ___/| |   | |_ | |( (___ (  ___/\__, \
-//            `\___/'`\____)(_)   `\__)(_)`\____)`\____)(____/
-//                                                    
-// ----------------------------------------------------------------------------
+/* ----------------------------------------------------------------------------
+               _   _               _                          
+              ( ) ( )             ( )_  _                     
+              | | | |   __   _ __ | ,_)(_)   ___    __    ___ 
+              | | | | /'__`\( '__)| |  | | /'___) /'__`\/',__)
+              | \_/ |(  ___/| |   | |_ | |( (___ (  ___/\__, \
+              `\___/'`\____)(_)   `\__)(_)`\____)`\____)(____/
+                                                      
+   ---------------------------------------------------------------------------- */
 void MiniTreeProducer::fillVertices(edm::Event& iEvent, 
                                     const edm::EventSetup& iSetup,
                                     std::auto_ptr<IPHCTree::MTEvent>& evt,
@@ -962,15 +965,15 @@ void MiniTreeProducer::fillVertices(edm::Event& iEvent,
 }
 
 
-// ----------------------------------------------------------------------------
-//                     _____                   _           
-//                    (_   _)                 ( )          
-//                      | | _ __   _ _    ___ | |/')   ___ 
-//                      | |( '__)/'_` ) /'___)| , <  /',__)
-//                      | || |  ( (_| |( (___ | |\`\ \__,
-//                      (_)(_)  `\__,_)`\____)(_) (_)(____/
-//                                     
-// ----------------------------------------------------------------------------
+/* ----------------------------------------------------------------------------
+                       _____                   _           
+                      (_   _)                 ( )          
+                        | | _ __   _ _    ___ | |/')   ___ 
+                        | |( '__)/'_` ) /'___)| , <  /',__)
+                        | || |  ( (_| |( (___ | |\`\ \__,
+                        (_)(_)  `\__,_)`\____)(_) (_)(____/
+                                       
+   ---------------------------------------------------------------------------- */
 void MiniTreeProducer::fillTracks(edm::Event& iEvent, 
                                   const edm::EventSetup& iSetup,
                                   std::auto_ptr<IPHCTree::MTEvent>& evt,
@@ -1014,11 +1017,11 @@ void MiniTreeProducer::fillTracks(edm::Event& iEvent,
 }
 
 
-// ----------------------------------------------------------------------------
-//
-//                    PFCandidates
-//                                     
-// ----------------------------------------------------------------------------
+/* ----------------------------------------------------------------------------
+
+                      PFCandidates
+                                       
+   ---------------------------------------------------------------------------- */
 
 
 void MiniTreeProducer::fillPFCandidates(edm::Event& iEvent, 
@@ -1183,15 +1186,15 @@ void MiniTreeProducer::fillPFCandidates(edm::Event& iEvent,
   }
 }
 
-// ----------------------------------------------------------------------------
-//                          _              ___                _          
-//    /'\_/`\              ( )_           (  _`\             (_ )        
-//    |     |   _     ___  | ,_)   __     | ( (_)   _ _  _ __ | |    _   
-//    | (_) | /'_`\ /' _ `\| |   /'__`\   | |  _  /'_` )( '__)| |  /'_`\ 
-//    | | | |( (_) )| ( ) || |_ (  ___/   | (_( )( (_| || |   | | ( (_) )
-//    (_) (_)`\___/'(_) (_)`\__)`\____)   (____/'`\__,_)(_)  (___)`\___/'
-//                                                                   
-// ----------------------------------------------------------------------------
+/* ----------------------------------------------------------------------------
+                            _              ___                _          
+      /'\_/`\              ( )_           (  _`\             (_ )        
+      |     |   _     ___  | ,_)   __     | ( (_)   _ _  _ __ | |    _   
+      | (_) | /'_`\ /' _ `\| |   /'__`\   | |  _  /'_` )( '__)| |  /'_`\ 
+      | | | |( (_) )| ( ) || |_ (  ___/   | (_( )( (_| || |   | | ( (_) )
+      (_) (_)`\___/'(_) (_)`\__)`\____)   (____/'`\__,_)(_)  (___)`\___/'
+                                                                   
+   ---------------------------------------------------------------------------- */
 void MiniTreeProducer::fillGenEventInfo(edm::Event& iEvent, 
                                         const edm::EventSetup& iSetup,
                                         std::auto_ptr<IPHCTree::MTEvent>& evt,
@@ -1234,17 +1237,17 @@ void MiniTreeProducer::fillGenEventInfo(edm::Event& iEvent,
 }
               
 
-// ----------------------------------------------------------------------------
-//                ___       _                   _   _        
-//               (  _`\  _ (_ )                ( ) ( )       
-//               | |_) )(_) | |    __   ______ | | | | _ _   
-//               | ,__/'| | | |  /'__`\(______)| | | |( '_`\ 
-//               | |    | | | | (  ___/        | (_) || (_) )
-//               (_)    (_)(___)`\____)        (_____)| ,__/'
-//                                                    | |    
-//                                                    (_)    
-//                                                                   
-// ----------------------------------------------------------------------------
+/* ----------------------------------------------------------------------------
+                  ___       _                   _   _        
+                 (  _`\  _ (_ )                ( ) ( )       
+                 | |_) )(_) | |    __   ______ | | | | _ _   
+                 | ,__/'| | | |  /'__`\(______)| | | |( '_`\ 
+                 | |    | | | | (  ___/        | (_) || (_) )
+                 (_)    (_)(___)`\____)        (_____)| ,__/'
+                                                      | |    
+                                                      (_)    
+                                                                   
+   ---------------------------------------------------------------------------- */
 void MiniTreeProducer::fillPileUp(edm::Event& iEvent, 
                                   const edm::EventSetup& iSetup,
                                   std::auto_ptr<IPHCTree::MTEvent>& evt,
@@ -1290,15 +1293,15 @@ void MiniTreeProducer::fillPileUp(edm::Event& iEvent,
 }
 
 
-// ----------------------------------------------------------------------------
-//   ___                  ___                _              _                
-//  (  _`\               (  _`\             ( )_  _        (_ )              
-//  | ( (_)   __    ___  | |_) )  _ _  _ __ | ,_)(_)   ___  | |    __    ___ 
-//  | |___  /'__`\/' _ `\| ,__/'/'_` )( '__)| |  | | /'___) | |  /'__`\/',__)
-//  | (_, )(  ___/| ( ) || |   ( (_| || |   | |_ | |( (___  | | (  ___/\__, \
-//  (____/'`\____)(_) (_)(_)   `\__,_)(_)   `\__)(_)`\____)(___)`\____)(____/
-//                                                                           
-// ---------------------------------------------------------------------------- 
+/* ----------------------------------------------------------------------------
+     ___                  ___                _              _                
+    (  _`\               (  _`\             ( )_  _        (_ )              
+    | ( (_)   __    ___  | |_) )  _ _  _ __ | ,_)(_)   ___  | |    __    ___ 
+    | |___  /'__`\/' _ `\| ,__/'/'_` )( '__)| |  | | /'___) | |  /'__`\/',__)
+    | (_, )(  ___/| ( ) || |   ( (_| || |   | |_ | |( (___  | | (  ___/\__, \
+    (____/'`\____)(_) (_)(_)   `\__,_)(_)   `\__)(_)`\____)(___)`\____)(____/
+                                                                             
+   ---------------------------------------------------------------------------- */
 void MiniTreeProducer::fillGenParticles(edm::Event& iEvent, 
                                         const edm::EventSetup& iSetup,
                                         std::auto_ptr<IPHCTree::MTEvent>& evt,
@@ -1553,15 +1556,15 @@ void MiniTreeProducer::fillOneGenParticle(const reco::GenParticle* src,
 }
 
               
-// ----------------------------------------------------------------------------
-//                ___    _             _                       
-//               (  _`\ ( )           ( )_                     
-//               | |_) )| |__     _   | ,_)   _     ___    ___ 
-//               | ,__/'|  _ `\ /'_`\ | |   /'_`\ /' _ `\/',__)
-//               | |    | | | |( (_) )| |_ ( (_) )| ( ) |\__, \
-//               (_)    (_) (_)`\___/'`\__)`\___/'(_) (_)(____/
-//
-// ----------------------------------------------------------------------------
+/* ----------------------------------------------------------------------------
+                  ___    _             _                       
+                 (  _`\ ( )           ( )_                     
+                 | |_) )| |__     _   | ,_)   _     ___    ___ 
+                 | ,__/'|  _ `\ /'_`\ | |   /'_`\ /' _ `\/',__)
+                 | |    | | | |( (_) )| |_ ( (_) )| ( ) |\__, \
+                 (_)    (_) (_)`\___/'`\__)`\___/'(_) (_)(____/
+
+   ---------------------------------------------------------------------------- */
 void MiniTreeProducer::fillPhotons(edm::Event& iEvent, 
                                    const edm::EventSetup& iSetup,
                                    std::auto_ptr<IPHCTree::MTEvent>& evt,
@@ -1637,15 +1640,15 @@ void MiniTreeProducer::fillPhotons(edm::Event& iEvent,
 }
         
 
-// ----------------------------------------------------------------------------
-//          ___    _                  _                            
-//         (  _`\ (_ )               ( )_                          
-//          | (_(_) | |    __     ___ | ,_) _ __   _     ___    ___ 
-//          |  _)_  | |  /'__`\ /'___)| |  ( '__)/'_`\ /' _ `\/',__)
-//          | (_( ) | | (  ___/( (___ | |_ | |  ( (_) )| ( ) |\__, \
-//         (____/'(___)`\____)`\____)`\__)(_)  `\___/'(_) (_)(____/
-//                                                         
-// ----------------------------------------------------------------------------
+/* ----------------------------------------------------------------------------
+            ___    _                  _                            
+           (  _`\ (_ )               ( )_                          
+            | (_(_) | |    __     ___ | ,_) _ __   _     ___    ___ 
+            |  _)_  | |  /'__`\ /'___)| |  ( '__)/'_`\ /' _ `\/',__)
+            | (_( ) | | (  ___/( (___ | |_ | |  ( (_) )| ( ) |\__, \
+           (____/'(___)`\____)`\____)`\__)(_)  `\___/'(_) (_)(____/
+                                                         
+   ---------------------------------------------------------------------------- */
 void MiniTreeProducer::fillElectrons(edm::Event& iEvent, 
                  const edm::EventSetup& iSetup,
                  std::auto_ptr<IPHCTree::MTEvent>& evt,
@@ -1792,12 +1795,13 @@ void MiniTreeProducer::fillElectrons(edm::Event& iEvent,
       if (AeffTypeTag == "GammaAndNeutralHadronIso03") AeffType = ElectronEffectiveArea::kEleGammaAndNeutralHadronIso03;
       else                  ERROR("Produce") << "Type-tag for Aeff '" << AeffTypeTag << "' unknown." << std::endl;
 
-               if (AeffTargetTag == "NoCorr")     AeffTarget = ElectronEffectiveArea::kEleEANoCorr;
+           if (AeffTargetTag == "NoCorr")     AeffTarget = ElectronEffectiveArea::kEleEANoCorr;
       else if (AeffTargetTag == "Data2011")   AeffTarget = ElectronEffectiveArea::kEleEAData2011;
       else if (AeffTargetTag == "Summer11MC") AeffTarget = ElectronEffectiveArea::kEleEASummer11MC;
       else if (AeffTargetTag == "Fall11MC")   AeffTarget = ElectronEffectiveArea::kEleEAFall11MC;
       else if (AeffTargetTag == "Data2012")   AeffTarget = ElectronEffectiveArea::kEleEAData2012;
-      else                  ERROR("Produce") << "Target-tag for Aeff '" << AeffTargetTag << "' unknown." << std::endl;
+      else { ERROR("Produce") << "Target-tag for Aeff '" << AeffTargetTag << "' unknown." << std::endl;
+             AeffTarget = ElectronEffectiveArea::kEleEAData2012; }  
 
       // Fill Aeff
       isoInfos["Aeff"] = ElectronEffectiveArea::GetElectronEffectiveArea(AeffType,
@@ -1852,7 +1856,7 @@ void MiniTreeProducer::fillElectrons(edm::Event& iEvent,
     edm::Handle< std::vector<pat::Electron> > recoElectrons;
     iEvent.getByLabel(cfg.doElectronMatch, recoElectrons);
 
-    const pat::Electron* bestMatch;
+    const pat::Electron* bestMatch = 0;
     float dR_bestMatch = 9999.0;
 
     // Find best recoElectron match for current electron
@@ -2048,15 +2052,15 @@ void MiniTreeProducer::fillElectrons(edm::Event& iEvent,
 }
 
 
-// ----------------------------------------------------------------------------
-//             
-//                  /'\_/`\                           
-//                  |     | _   _    _     ___    ___ 
-//                  | (_) |( ) ( ) /'_`\ /' _ `\/',__)
-//                  | | | || (_) |( (_) )| ( ) |\__, \
-//                  (_) (_)`\___/'`\___/'(_) (_)(____/
-//                                                         
-// ----------------------------------------------------------------------------
+/* ----------------------------------------------------------------------------
+             
+                    /'\_/`\                           
+                    |     | _   _    _     ___    ___ 
+                    | (_) |( ) ( ) /'_`\ /' _ `\/',__)
+                    | | | || (_) |( (_) )| ( ) |\__, \
+                    (_) (_)`\___/'`\___/'(_) (_)(____/
+                                                         
+   ---------------------------------------------------------------------------- */
 void MiniTreeProducer::fillMuons(edm::Event& iEvent, 
                  const edm::EventSetup& iSetup,
                  std::auto_ptr<IPHCTree::MTEvent>& evt,
@@ -2244,7 +2248,7 @@ void MiniTreeProducer::fillMuons(edm::Event& iEvent,
     edm::Handle< std::vector<pat::Muon> > recoMuons;
     iEvent.getByLabel(cfg.doMuonMatch, recoMuons);
 
-    const pat::Muon* bestMatch;
+    const pat::Muon* bestMatch = 0;
     float dR_bestMatch = 9999.0;
 
     // Find best recoMuon match for current muon
@@ -2385,15 +2389,15 @@ void MiniTreeProducer::fillMuons(edm::Event& iEvent,
 }
 
 
-// ----------------------------------------------------------------------------
-//                         _____                   
-//                        (_   _)                  
-//                          | |   _ _  _   _   ___ 
-//                          | | /'_` )( ) ( )/',__)
-//                          | |( (_| || (_) |\__, \
-//                          (_)`\__,_)`\___/'(____/
-//                                                         
-// ----------------------------------------------------------------------------
+/* ----------------------------------------------------------------------------
+                           _____                   
+                          (_   _)                  
+                            | |   _ _  _   _   ___ 
+                            | | /'_` )( ) ( )/',__)
+                            | |( (_| || (_) |\__, \
+                            (_)`\__,_)`\___/'(____/
+                                                         
+   ---------------------------------------------------------------------------- */
 void MiniTreeProducer::fillTaus(edm::Event& iEvent, 
                  const edm::EventSetup& iSetup,
                  std::auto_ptr<IPHCTree::MTEvent>& evt,
@@ -2576,15 +2580,15 @@ bool MiniTreeProducer::getBfieldFromDCS(edm::Event& iEvent, const edm::EventSetu
 }
 
 
-// ----------------------------------------------------------------------------
-//                   _____         _           ___   _____ 
-//                  (___  )       ( )_ /'\_/`\(  _`\(_   _)
-//                      | |   __  | ,_)|     || (_(_) | |  
-//                   _  | | /'__`\| |  | (_) ||  _)_  | |  
-//                  ( )_| |(  ___/| |_ | | | || (_( ) | |  
-//                  `\___/'`\____)`\__)(_) (_)(____/' (_)  
-//
-// ----------------------------------------------------------------------------
+/* ----------------------------------------------------------------------------
+                     _____         _           ___   _____ 
+                    (___  )       ( )_ /'\_/`\(  _`\(_   _)
+                        | |   __  | ,_)|     || (_(_) | |  
+                     _  | | /'__`\| |  | (_) ||  _)_  | |  
+                    ( )_| |(  ___/| |_ | | | || (_( ) | |  
+                    `\___/'`\____)`\__)(_) (_)(____/' (_)  
+
+   ---------------------------------------------------------------------------- */
 std::pair<float,float> MiniTreeProducer::fillMuonMET(
          const edm::Handle<edm::ValueMap<reco::MuonMETCorrectionData> >& muMET, 
          const edm::Handle<std::vector<reco::Muon> >& muons )
@@ -2679,7 +2683,7 @@ void MiniTreeProducer::fillJetMET(edm::Event& iEvent,
       // px() - met.corEx(uc0) = uncmisEt.px(), idem for py
 
       // { uncorrALL, uncorrJES, uncorrMUON, uncorrMAXN }
-      pat::MET::UncorrectionType uc0 = pat::MET::UncorrectionType(0);
+      //pat::MET::UncorrectionType uc0 = pat::MET::UncorrectionType(0);
       //pat::MET::UncorrectionType uc1 = pat::MET::UncorrectionType(1);
       //pat::MET::UncorrectionType uc2 = pat::MET::UncorrectionType(2);
 
@@ -2715,7 +2719,7 @@ void MiniTreeProducer::fillJetMET(edm::Event& iEvent,
         // px() - met.corEx(uc0) = uncmisEt.px(), idem for py
 
       // { uncorrALL, uncorrJES, uncorrMUON, uncorrMAXN }
-        pat::MET::UncorrectionType uc0 = pat::MET::UncorrectionType(0);
+        //pat::MET::UncorrectionType uc0 = pat::MET::UncorrectionType(0);
         //pat::MET::UncorrectionType uc1 = pat::MET::UncorrectionType(1);
         //pat::MET::UncorrectionType uc2 = pat::MET::UncorrectionType(2);
 

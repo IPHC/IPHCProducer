@@ -306,7 +306,7 @@ void MonteCarloOrigin::getHeavyQuarkDecayProducts(const reco::Candidate* inputPa
 int MonteCarloOrigin::getHeavyQuarkDecayFromGenParticle(reco::GenParticleCollection::const_iterator genQuark)
 {
 	int quarkDecay = -99;
-	int quarkFlavor = genQuark->pdgId();
+	//int quarkFlavor = genQuark->pdgId();
    
 	// Get the vector containing the decay products
 	std::vector<const reco::Candidate*> decayProducts;
@@ -402,13 +402,15 @@ void MonteCarloOrigin::fillGenInfo(std::auto_ptr<IPHCTree::MTEvent>& evt,
       const reco::Candidate * ZDaughter = 0;
       const reco::Candidate * Tau = 0;
       const reco::Candidate * TauDaughter = 0;
-      const reco::Candidate * TauNu1 = 0;
-      const reco::Candidate * TauNu2 = 0;
-      const reco::Candidate * TauANu1 = 0;
-      const reco::Candidate * TauANu2 = 0;
+      // Not used
+      //const reco::Candidate * TauNu1 = 0;
+      //const reco::Candidate * TauNu2 = 0;
+      //const reco::Candidate * TauANu1 = 0;
+      //const reco::Candidate * TauANu2 = 0;
       TLorentzVector v;
      
-      bool Ztobb = false;
+      // Not used
+      //bool Ztobb = false;
       ZDecaysMC zBoson;
       zBoson.p4_Z_gen.SetPxPyPzE (p->p4().Px(), p->p4().Py(), p->p4().Pz(), p->p4().E());
  
@@ -418,8 +420,9 @@ void MonteCarloOrigin::fillGenInfo(std::auto_ptr<IPHCTree::MTEvent>& evt,
       {
         //ZDaughter = const_cast<reco::Candidate*> (p->daughter(d));
         ZDaughter = p->daughter (d);
-        if (abs (ZDaughter->pdgId ()) == 5)
-          Ztobb = true;
+        // Not used
+        //if (abs (ZDaughter->pdgId ()) == 5)
+        //  Ztobb = true;
         if (ZDaughter->status () == 3) {
           if (ZDaughter->pdgId () == 11 || ZDaughter->pdgId () == 13 || ZDaughter->pdgId () == 15) {
             zBoson.p4_Lep1_gen.SetPxPyPzE (ZDaughter->p4 ().Px (), ZDaughter->p4 ().Py (), ZDaughter->p4 ().Pz (), ZDaughter->p4 ().E ());
@@ -440,10 +443,8 @@ void MonteCarloOrigin::fillGenInfo(std::auto_ptr<IPHCTree::MTEvent>& evt,
           if (abs (ZDaughter->pdgId ()) == 15) {
             Tau = ZDaughter; 
             TauDaughter = ZDaughter->daughter (0);
-            //while (abs (TauDaughter->pdgId ()) == 15 && TauDaughter->numberOfDaughters ()>0) {
             while (abs (TauDaughter->pdgId ()) == 15 && TauDaughter->numberOfDaughters()>0) {	     
               Tau = TauDaughter;
-              //TauDaughter = const_cast<reco::Candidate*> (TauDaughter->daughter(0));
               TauDaughter = TauDaughter->daughter (0);
             }
 	    
@@ -453,23 +454,23 @@ void MonteCarloOrigin::fillGenInfo(std::auto_ptr<IPHCTree::MTEvent>& evt,
               bool stableTau = false;
 	    
               for (unsigned int k = 0; k < Tau->numberOfDaughters (); k++) {
-                //if      ( Tau->daughter(k)->pdgId() == 16)  { TauNu1  = const_cast<reco::Candidate*> (Tau->daughter(k));
                 if (Tau->daughter (k)->pdgId () == 16) {
-                  TauNu1 = Tau->daughter (k);
+                  // Not used
+                  //TauNu1 = Tau->daughter (k);
                 }
-                //else if ( Tau->daughter(k)->pdgId() == -16) { TauANu1 = const_cast<reco::Candidate*> (Tau->daughter(k));
                 else if (Tau->daughter (k)->pdgId () == -16) {
-                  TauANu1 = Tau->daughter (k);
+                  // Not used
+                  //TauANu1 = Tau->daughter (k);
                 }
                 else if (Tau->daughter (k)->pdgId () == 12 ||
-                         //Tau->daughter(k)->pdgId() == 14)   { TauNu2 = const_cast<reco::Candidate*> (Tau->daughter(k));
                          Tau->daughter (k)->pdgId () == 14) {
-                  TauNu2 = Tau->daughter (k);
+                  // Not used
+                  //TauNu2 = Tau->daughter (k);
                 }
                 else if (Tau->daughter (k)->pdgId () == -12 ||
-                         //Tau->daughter(k)->pdgId() == -14)  { TauANu2 = const_cast<reco::Candidate*> (Tau->daughter(k));
                          Tau->daughter (k)->pdgId () == -14) {
-                  TauANu2 = Tau->daughter (k);
+                  // Not used
+                  //TauANu2 = Tau->daughter (k);
                 }
                 else if (abs (Tau->daughter (k)->pdgId ()) == 11) {
                   tmeme = tmeme + 10100;
@@ -508,8 +509,9 @@ void MonteCarloOrigin::fillGenInfo(std::auto_ptr<IPHCTree::MTEvent>& evt,
       const Candidate *WDaughter = 0;
       const Candidate *TauDaughter = 0;
       const Candidate *Tau = 0;
-      const Candidate *TauNu1 = 0;
-      const Candidate *TauNu2 = 0;
+      // Not used
+      //const Candidate *TauNu1 = 0;
+      //const Candidate *TauNu2 = 0;
      
       WDecaysMC wBosons;
       wBosons.p4_W_gen.SetPxPyPzE (p->p4 ().Px (), p->p4 ().Py (), p->p4 ().Pz (), p->p4 ().E ());
@@ -565,11 +567,13 @@ void MonteCarloOrigin::fillGenInfo(std::auto_ptr<IPHCTree::MTEvent>& evt,
                   lepDecay = true;
                 }
                 else if (abs (Tau->daughter (k)->pdgId ()) == 16) {
-                  TauNu1 = Tau->daughter (k);//what for, one should store anti-nu as well... 
+                  // Not used
+                  //TauNu1 = Tau->daughter (k);//what for, one should store anti-nu as well... 
                 }
 	       
                 else if (abs (Tau->daughter (k)->pdgId ()) == 12 || abs (Tau->daughter (k)->pdgId () == 14)) {
-                  TauNu2 = Tau->daughter (k);//what for, one should store anti-nu as well...
+                  // Not used
+                  //TauNu2 = Tau->daughter (k);//what for, one should store anti-nu as well...
                 }
                 else if (abs (Tau->daughter (k)->pdgId ()) == 15) {	
                   stableTau = true;
