@@ -175,7 +175,7 @@ int SkimTopDiLepton::GetNumberOfIDMuons(const IPHCTree::NTEvent* event)
     if(fabs(event->muons[i].D0Inner)  >= 0.02)                    continue;
     if(fabs(event->muons[i].p4.Eta()) >= 2.4)                     continue;
     if(muon_cut_pt>0 && event->muons[i].p4.Pt()<muon_cut_pt)      continue;
-    if(muon_cut_iso>0 && event->muons[i].RelIso03()>muon_cut_iso) continue;
+    //if(muon_cut_iso>0 && event->muons[i].RelIso03()>muon_cut_iso) continue;
     nmuons++;
   }
   return nmuons;
@@ -200,7 +200,7 @@ int SkimTopDiLepton::GetNumberOfMuons(const IPHCTree::NTEvent* event)
   for(unsigned int i=0; i<event->muons.size(); i++)
   {
     if(muon_cut_pt>0 && event->muons[i].p4.Pt()     < muon_cut_pt)  continue;
-    if(muon_cut_iso>0 && event->muons[i].RelIso03() > muon_cut_iso) continue;
+    //if(muon_cut_iso>0 && event->muons[i].RelIso03() > muon_cut_iso) continue;
     nmuons++;
   }
   return nmuons;
@@ -236,7 +236,7 @@ int SkimTopDiLepton::GetNumberOfIDElectrons(const IPHCTree::NTEvent* event)
     if(fabs(event->electrons[i].p4.Eta())>=2.5)     continue;
     if(event->electrons[i].ET_SC         <=15)      continue;
     if(electron_cut_pt>0 && event->electrons[i].p4.Pt() < electron_cut_pt)      continue;
-    if(electron_cut_iso>0 && event->electrons[i].RelIso03() > electron_cut_iso) continue;
+    //if(electron_cut_iso>0 && event->electrons[i].RelIso03() > electron_cut_iso) continue;
     nelectrons++;
   }
   return nelectrons;
@@ -262,8 +262,7 @@ int SkimTopDiLepton::GetNumberOfElectrons(const IPHCTree::NTEvent* event)
   {
     if (electron_cut_pt>0  && 
         event->electrons[i].p4.Pt() < electron_cut_pt) continue;
-    if (electron_cut_iso>0 && 
-        event->electrons[i].RelIso03() > electron_cut_iso) continue;
+    //if (electron_cut_iso>0 &&   event->electrons[i].RelIso03() > electron_cut_iso) continue;
     nelectrons++;
   }
   

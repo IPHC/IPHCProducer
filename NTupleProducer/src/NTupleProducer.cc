@@ -12,7 +12,7 @@ NTupleProducer::NTupleProducer (const edm::ParameterSet & iConfig)
 
   // Read configuration file 
   verbose         = iConfig.getParameter<unsigned int>("verbose");
-  traceability    = iConfig.getParameter<std::vector<std::string> >("traceability");
+  //traceability    = iConfig.getParameter<std::vector<std::string> >("traceability");
 
   // topfilter
   top_filter.Initialize(iConfig.getParameter<edm::ParameterSet> ("topdilepton_skim"));
@@ -64,6 +64,7 @@ NTupleProducer::~NTupleProducer ()
 bool NTupleProducer::FillSampleInfo(IPHCTree::NTSampleInfo* info)
 {
   // safety
+  /*
   if (traceability.size()<6)
   {
     std::cout << "TraceabilityError: missing information" << std::endl;
@@ -87,7 +88,7 @@ bool NTupleProducer::FillSampleInfo(IPHCTree::NTSampleInfo* info)
   {
     new(config[i]) TObjString(traceability[i+6].c_str());
   }
-
+*/
   // Ok
   return true;
 }

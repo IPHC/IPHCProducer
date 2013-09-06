@@ -2113,6 +2113,8 @@ void MiniTreeProducer::fillMuons(edm::Event& iEvent,
     mymuon->isStandaloneMuon = patmuon->isStandAloneMuon();
     mymuon->isTrackerMuon    = patmuon->isTrackerMuon();
     mymuon->isCaloMuon       = patmuon->isCaloMuon();
+    //mymuon->isPFMuon       
+    mymuon->isPFMuon = patmuon->isPFMuon();
 
     // Muon DB
     mymuon->DB = patmuon->dB();
@@ -2216,9 +2218,6 @@ void MiniTreeProducer::fillMuons(edm::Event& iEvent,
     // Saving ids
     mymuon->ID.Fill(ids);
 
-  // --------- [Begin] Infos for SUSYstop analysis ---------
-
-    mymuon->isPFMuon = patmuon->isPFMuon();
 
   mymuon->numMatchedStations = patmuon->numberOfMatchedStations();
   
