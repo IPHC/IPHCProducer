@@ -93,7 +93,7 @@ if options.useData :
         process.GlobalTag.globaltag = cms.string( options.globalTag )
 else :
     if options.globalTag is '':
-        process.GlobalTag.globaltag = cms.string( 'START53_V7E::All' )
+        process.GlobalTag.globaltag = cms.string( 'START53_V20::All' )
     else:
         process.GlobalTag.globaltag = cms.string( options.globalTag )
 
@@ -101,51 +101,6 @@ else :
 from PhysicsTools.PatAlgos.patTemplate_cfg import *
 
 
-## The beam scraping filter __________________________________________________||
-process.noscraping = cms.EDFilter(
-    "FilterOutScraping",
-    applyfilter = cms.untracked.bool(True),
-    debugOn = cms.untracked.bool(False),
-    numtrack = cms.untracked.uint32(10),
-    thresh = cms.untracked.double(0.25)
-    )
-
-## The iso-based HBHE noise filter ___________________________________________||
-process.load('CommonTools.RecoAlgos.HBHENoiseFilter_cfi')
-
-## The Good vertices collection needed by the tracking failure filter ________||
-process.goodVertices = cms.EDFilter(
-  "VertexSelector",
-  filter = cms.bool(False),
-  src = cms.InputTag("offlinePrimaryVertices"),
-  cut = cms.string("!isFake && ndof > 4 && abs(z) <= 24 && position.rho < 2")
-)
-
-
-###############################
-####### DAF PV's     ##########
-###############################
-
-pvSrc = 'offlinePrimaryVertices'
-
-## The good primary vertex filter ____________________________________________||
-process.primaryVertexFilter = cms.EDFilter(
-    "VertexSelector",
-    src = cms.InputTag("offlinePrimaryVertices"),
-    cut = cms.string("!isFake & ndof > 4 & abs(z) <= 24 & position.Rho <= 2"),
-    filter = cms.bool(True)
-    )
-
-
-from PhysicsTools.SelectorUtils.pvSelector_cfi import pvSelector
-
-process.goodOfflinePrimaryVertices = cms.EDFilter(
-    "PrimaryVertexObjectFilter",
-    filterParams = pvSelector.clone( maxZ = cms.double(24.0),
-                                     minNdof = cms.double(4.0) # this is >= 4
-                                     ),
-    src=cms.InputTag(pvSrc)
-    )
 
 
 ###############################
@@ -248,17 +203,49 @@ switchJetCollection(process,cms.InputTag('ak5PFJets'),
 		    jetCorrLabel = inputJetCorrLabel,
 		    doType1MET   = True,
 		    genJetCollection=cms.InputTag("ak5GenJetsNoNu"),
-		    doJetID      = False
+		    doJetID      = True
 		    )
- #################################################
-# # Produce trigger infos #
-# #################################################
+		    
+process.load("JetMETCorrections.Type1MET.pfMETCorrectionType0_cfi")
+process.pfType1CorrectedMet.applyType0Corrections = cms.bool(False)
+process.pfType1CorrectedMet.srcType1Corrections = cms.VInputTag(
+    cms.InputTag('pfMETcorrType0'),
+    cms.InputTag('pfJetMETcorr', 'type1')        
+)		    
+
+
+
+#################################################
+## Produce trigger infos #
+##################################################
 
 process.load("PhysicsTools.PatAlgos.triggerLayer1.triggerProducer_cff")
 from PhysicsTools.PatAlgos.triggerLayer1.triggerProducer_cfi import *
 from PhysicsTools.PatAlgos.triggerLayer1.triggerEventProducer_cfi import *
 process.patTrigger = patTrigger.clone()
 process.patTriggerEvent = patTriggerEvent.clone()
+
+
+
+
+#################################################
+## Type I and Type 0 correction#
+##################################################
+
+#process.load("JetMETCorrections.Type1MET.pfMETCorrections_cff")
+
+
+
+
+#process.load("JetMETCorrections.Type1MET.pfMETCorrections_cff")
+#process.load("JetMETCorrections.Type1MET.pfMETCorrectionType0_cfi")
+#process.pfType1CorrectedMet.applyType0Corrections = cms.bool(False)
+#process.pfType1CorrectedMet.srcType1Corrections = cms.VInputTag(
+#    cms.InputTag('pfMETcorrType0'),
+#    cms.InputTag('pfJetMETcorr', 'type1')        
+#)
+
+
 
 
 ###############################
@@ -283,7 +270,7 @@ process.MiniTreeProduction = cms.EDProducer('MiniTreeProducer',
          electron_saveAllID  = cms.bool(False),
          electron_IDlist     = cms.vstring("mvaTrigV0","mvaNonTrigV0", "eidLoose","eidRobustLoose", "eidTight"),
          electronHLTmatching = cms.vstring(""),
-	 electron_Isolist = cms.vstring("PAT"),
+	 electron_Isolist = cms.vstring("PAT","PF03"),
          electron_rhoCorrSrc = cms.vstring("kt6PFJetsForIsolation2011","GammaAndNeutralHadronIso03","Data2012"),
 ##         electronProducer  = cms.VInputTag(cms.InputTag("selectedPatElectronsPF2PAT")),
          electronProducer    = cms.VInputTag(cms.InputTag("selectedPatElectronsPFlow")),        
@@ -350,6 +337,7 @@ process.MiniTreeProduction = cms.EDProducer('MiniTreeProducer',
                     cms.PSet(
                  jet    = cms.untracked.string("selectedPatJetsPFlow"),
                  met    = cms.untracked.string("patMETsPFlow"),
+                 ##met    = cms.untracked.string("pfType1CorrectedMet"),
                  algo   = cms.untracked.string("pf"),                              
 		 fillJetConstituents = cms.untracked.bool(False),
 		 fillSubJetConstituents = cms.untracked.bool(False)
@@ -480,22 +468,98 @@ process.TFileService = cms.Service( "TFileService",
                            )
 
 
+## The iso-based HBHE noise filter ___________________________________________||
+process.load('CommonTools.RecoAlgos.HBHENoiseFilter_cfi')
+
+## The CSC beam halo tight filter ____________________________________________||
+process.load('RecoMET.METAnalyzers.CSCHaloFilter_cfi')
+
+## The HCAL laser filter _____________________________________________________||
+process.load('RecoMET.METFilters.hcalLaserEventFilter_cfi')
+
+## The ECAL dead cell trigger primitive filter _______________________________||
+process.load('RecoMET.METFilters.EcalDeadCellTriggerPrimitiveFilter_cfi') 
+
+## The EE bad SuperCrystal filter ____________________________________________||
+process.load('RecoMET.METFilters.eeBadScFilter_cfi') 
+
+## The ECAL laser correction filter
+process.load('RecoMET.METFilters.ecalLaserCorrFilter_cfi')
+
+## The tracking failure filter _______________________________________________||
+process.load('RecoMET.METFilters.trackingFailureFilter_cfi')
+
+## The tracking POG filters __________________________________________________||
+process.load('RecoMET.METFilters.trackingPOGFilters_cff')
+
+
+## The beam scraping filter __________________________________________________||
+process.noscraping = cms.EDFilter(
+    "FilterOutScraping",
+    applyfilter = cms.untracked.bool(True),
+    debugOn = cms.untracked.bool(False),
+    numtrack = cms.untracked.uint32(10),
+    thresh = cms.untracked.double(0.25)
+    )
+
+## The iso-based HBHE noise filter ___________________________________________||
+process.load('CommonTools.RecoAlgos.HBHENoiseFilter_cfi')
+
+## The Good vertices collection needed by the tracking failure filter ________||
+process.goodVertices = cms.EDFilter(
+  "VertexSelector",
+  filter = cms.bool(False),
+  src = cms.InputTag("offlinePrimaryVertices"),
+  cut = cms.string("!isFake && ndof > 4 && abs(z) <= 24 && position.rho < 2")
+)
+
+
+
+###############################
+####### DAF PV's     ##########
+###############################
+
+pvSrc = 'offlinePrimaryVertices'
+
+## The good primary vertex filter ____________________________________________||
+process.primaryVertexFilter = cms.EDFilter(
+    "VertexSelector",
+    src = cms.InputTag("offlinePrimaryVertices"),
+    cut = cms.string("!isFake & ndof > 4 & abs(z) <= 24 & position.Rho < 2"),
+    filter = cms.bool(True)
+    )
+
+
+from PhysicsTools.SelectorUtils.pvSelector_cfi import pvSelector
+
+process.goodOfflinePrimaryVertices = cms.EDFilter(
+    "PrimaryVertexObjectFilter",
+    filterParams = pvSelector.clone( maxZ = cms.double(24.0),
+                                     minNdof = cms.double(4.0) # this is >= 4
+                                     ),
+    src=cms.InputTag(pvSrc)
+    )
+    
+process.trackingFailureFilter.VertexSource = 'primaryVertexFilter'
+  
 process.filtersSeq = cms.Sequence(
    process.primaryVertexFilter *
-   process.noscraping *
-   process.HBHENoiseFilter*
-   process.goodOfflinePrimaryVertices #*
-   #process.CSCTightHaloFilter *
-   #process.hcalLaserEventFilter *
-   #process.EcalDeadCellTriggerPrimitiveFilter *
-   #process.goodVertices 
-   #* process.trackingFailureFilter *
-   #process.eeBadScFilter
+   #process.noscraping *
+   process.HBHENoiseFilter* 
+   process.CSCTightHaloFilter *
+   process.hcalLaserEventFilter *
+   process.EcalDeadCellTriggerPrimitiveFilter *
+   process.trackingFailureFilter *
+   process.eeBadScFilter *
+   process.ecalLaserCorrFilter *
+   process.trkPOGFilters
 )
 
 process.patseq = cms.Sequence(
-    process.filtersSeq*
-    #process.goodOfflinePrimaryVertices*
+    process.filtersSeq* 
+    process.type0PFMEtCorrection*
+    process.producePFMETCorrections*
+    process.goodOfflinePrimaryVertices*
     getattr(process,"patPF2PATSequence"+postfix)
     )
 

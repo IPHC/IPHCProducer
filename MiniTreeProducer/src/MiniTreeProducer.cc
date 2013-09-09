@@ -230,7 +230,7 @@ void MiniTreeProducer::produce(edm::Event& iEvent,
     // -------------------------------------
     // Gen Event Info
     // -------------------------------------
-    if (cfg.verbose > 1) std::cout << "Filling MC event info ..." << std::endl;
+    //if (cfg.verbose > 1) std::cout << "Filling MC event info ..." << std::endl;
 
     edm::Handle<GenEventInfoProduct> theGenEventInfo;
     iEvent.getByType(theGenEventInfo);
@@ -248,7 +248,7 @@ void MiniTreeProducer::produce(edm::Event& iEvent,
     // -------------------------------------
     if (cfg.doPileUp)
     {
-      if (cfg.verbose > 1) std::cout << "Filling Pile-Up ..." << std::endl;
+      //if (cfg.verbose > 1) std::cout << "Filling Pile-Up ..." << std::endl;
 
       edm::Handle<std::vector< PileupSummaryInfo> > PupInfo;
       iEvent.getByLabel("addPileupInfo", PupInfo);
@@ -267,7 +267,7 @@ void MiniTreeProducer::produce(edm::Event& iEvent,
     // -------------------------------------
     if (cfg.doGenParticleCollection)
     {
-      if (cfg.verbose > 1) std::cout << "Filling GenParticles ..." << std::endl;
+      //if (cfg.verbose > 1) std::cout << "Filling GenParticles ..." << std::endl;
       edm::Handle<reco::GenParticleCollection> genParticlesHandle;
       iEvent.getByLabel ("genParticles", genParticlesHandle);
       if (genParticlesHandle.isValid())
@@ -308,7 +308,7 @@ void MiniTreeProducer::produce(edm::Event& iEvent,
   if (cfg.doTrigger)
   {
 
-    if (cfg.verbose>1) std::cout << "Filling trigger ..." << std::endl;
+    //if (cfg.verbose>1) std::cout << "Filling trigger ..." << std::endl;
 
     // Getting Trigger products
      
@@ -332,7 +332,7 @@ void MiniTreeProducer::produce(edm::Event& iEvent,
   // ------------------------
   if (cfg.doBeamSpot)
   {
-    if (cfg.verbose>1) std::cout << "Filling beamspot ..." << std::endl;
+    //if (cfg.verbose>1) std::cout << "Filling beamspot ..." << std::endl;
 
     // Getting BeamSpot  
     edm::Handle<reco::BeamSpot> recoBeamSpotHandle;
@@ -360,7 +360,7 @@ void MiniTreeProducer::produce(edm::Event& iEvent,
   // ------------------------
   if (cfg.doTracks)
   {
-    if (cfg.verbose>1) std::cout << "Filling tracks ..." << std::endl;
+    //if (cfg.verbose>1) std::cout << "Filling tracks ..." << std::endl;
 
     std::set<std::string> labels;
     for (unsigned int i=0;i<cfg.trackProducer.size();i++)
@@ -398,7 +398,7 @@ void MiniTreeProducer::produce(edm::Event& iEvent,
   
   if (cfg.doPFCandidates)
   {
-    if (cfg.verbose>1) std::cout << "Filling PFCandidates ..." << std::endl;
+    //if (cfg.verbose>1) std::cout << "Filling PFCandidates ..." << std::endl;
 
     std::set<std::string> labels;
     for (unsigned int i=0;i<cfg.pfcandidate_InputTag.size();i++)
@@ -440,7 +440,7 @@ void MiniTreeProducer::produce(edm::Event& iEvent,
   // ------------------------
   if (cfg.doVertices)
   {
-    if (cfg.verbose>1) std::cout << "Filling vertices ..." << std::endl;
+    //if (cfg.verbose>1) std::cout << "Filling vertices ..." << std::endl;
   
     std::set<std::string> labels;
     for (unsigned int i=0;i<cfg.vertexProducer.size();i++)
@@ -478,7 +478,7 @@ void MiniTreeProducer::produce(edm::Event& iEvent,
   // ------------------------
   if (cfg.doPhotons)
   {
-    if (cfg.verbose>1) std::cout << "Filling photons ..." << std::endl;
+    //if (cfg.verbose>1) std::cout << "Filling photons ..." << std::endl;
       
     std::set<std::string> labels;
     for (unsigned int i=0;i<cfg.photonProducer.size();i++)
@@ -529,7 +529,7 @@ void MiniTreeProducer::produce(edm::Event& iEvent,
   // ------------------------
   if (cfg.doElectrons)
   {
-    if (cfg.verbose>1) std::cout << "Filling electrons ..." << std::endl;
+    //if (cfg.verbose>1) std::cout << "Filling electrons ..." << std::endl;
       
     std::set<std::string> labels;
     for (unsigned int i=0;i<cfg.electronProducer.size();i++)
@@ -593,7 +593,7 @@ void MiniTreeProducer::produce(edm::Event& iEvent,
   // ------------------------
   if (cfg.doMuons)
   {
-    if (cfg.verbose>1) std::cout << "Filling muons ..." << std::endl;
+    //if (cfg.verbose>1) std::cout << "Filling muons ..." << std::endl;
 
     std::set<std::string> labels;
     for (unsigned int i=0;i<cfg.muonProducer.size();i++)
@@ -631,7 +631,7 @@ void MiniTreeProducer::produce(edm::Event& iEvent,
   // ------------------------
   if (cfg.doTaus)
   {
-    if (cfg.verbose>1) std::cout << "Filling taus ..." << std::endl;
+    //if (cfg.verbose>1) std::cout << "Filling taus ..." << std::endl;
 
     std::set<std::string> labels;
     for (unsigned int i=0;i<cfg.tauProducer.size();i++)
@@ -674,7 +674,7 @@ void MiniTreeProducer::produce(edm::Event& iEvent,
  
     if (cfg.doMuonCorrection)
     {
-      if (cfg.verbose>1) std::cout << "Filling muon correction for MET ..."  << std::endl;
+      //if (cfg.verbose>1) std::cout << "Filling muon correction for MET ..."  << std::endl;
 
       edm::Handle<edm::ValueMap<reco::MuonMETCorrectionData> > muMEThandle;
       iEvent.getByLabel("muonTCMETValueMapProducer", "muCorrData", muMEThandle);
@@ -701,7 +701,7 @@ void MiniTreeProducer::produce(edm::Event& iEvent,
       }
     }
 
-    if (cfg.verbose>1) std::cout << "Filling jet MET ..."  << std::endl;
+    //if (cfg.verbose>1) std::cout << "Filling jet MET ..."  << std::endl;
 
     std::set<std::string> labels;
     for (VParameters::iterator ijetmet = cfg.jetmetProducer.begin();

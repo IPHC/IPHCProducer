@@ -102,18 +102,18 @@ void FillNTuple::Fill(const IPHCTree::MTEvent* minitree, IPHCTree::NTEvent* ntup
     ntuple->mc.Generatedtaus.clear();
     ntuple->mc.GeneratedAtaus.clear();
   }
-
+  verbose = -100;
   // -------------------------------------
   // Trigger
   // -------------------------------------
   if (!skimTrigger)
   {
-    if (verbose > 0) std::cout << "Filling trigger (no skim) ..." << std::endl;
+    //if (verbose > 0) std::cout << "Filling trigger (no skim) ..." << std::endl;
     ntuple->trigger = minitree->trigger;
   }
   else
   {
-    if (verbose > 0) std::cout << "Filling trigger (skim) ..." << std::endl;
+    //if (verbose > 0) std::cout << "Filling trigger (skim) ..." << std::endl;
 
     // Getting trigger data in a comfortable format
     std::vector<IPHCTree::NTTriggerPathType> paths;
@@ -143,8 +143,8 @@ void FillNTuple::Fill(const IPHCTree::MTEvent* minitree, IPHCTree::NTEvent* ntup
   // -------------------------------------
   // Electrons
   // -------------------------------------
-  if (!skimElectrons) {if (verbose > 0) std::cout << "Filling electrons (no skim) ..." << std::endl;}
-  else {if (verbose > 0) std::cout << "Filling electrons (skim) ..." << std::endl;}
+  //if (!skimElectrons) {if (verbose > 0) std::cout << "Filling electrons (no skim) ..." << std::endl;}
+  //else {if (verbose > 0) std::cout << "Filling electrons (skim) ..." << std::endl;}
 
   // Get list of electron collection names
   std::set<std::string> labels;
@@ -185,8 +185,8 @@ void FillNTuple::Fill(const IPHCTree::MTEvent* minitree, IPHCTree::NTEvent* ntup
   // -------------------------------------
   // Photons
   // -------------------------------------
-  if (!skimPhotons) {if (verbose > 0) std::cout << "Filling photons (no skim) ..." << std::endl;}
-  else {if (verbose > 0) std::cout << "Filling photons (skim) ..." << std::endl;}
+  //if (!skimPhotons) {if (verbose > 0) std::cout << "Filling photons (no skim) ..." << std::endl;}
+  //else {if (verbose > 0) std::cout << "Filling photons (skim) ..." << std::endl;}
 
   // Get list of photon collection names
   labels.clear();
@@ -227,8 +227,8 @@ void FillNTuple::Fill(const IPHCTree::MTEvent* minitree, IPHCTree::NTEvent* ntup
   // -------------------------------------
   // Muons
   // -------------------------------------
-  if (!skimMuons) {if (verbose > 0) std::cout << "Filling muons (no skim) ..." << std::endl;}
-  else {if (verbose > 0) std::cout << "Filling muons (skim) ..." << std::endl;}
+  //if (!skimMuons) {if (verbose > 0) std::cout << "Filling muons (no skim) ..." << std::endl;}
+  //else {if (verbose > 0) std::cout << "Filling muons (skim) ..." << std::endl;}
 
   // Get list of muon collection names
   labels.clear();
@@ -270,8 +270,8 @@ void FillNTuple::Fill(const IPHCTree::MTEvent* minitree, IPHCTree::NTEvent* ntup
   // -------------------------------------
   // Taus
   // -------------------------------------
-  if (!skimTaus) {if (verbose > 0) std::cout << "Filling taus (no skim) ..." << std::endl;}
-  else {if (verbose > 0) std::cout << "Filling taus (skim) ..." << std::endl;}
+  //if (!skimTaus) {if (verbose > 0) std::cout << "Filling taus (no skim) ..." << std::endl;}
+  //else {if (verbose > 0) std::cout << "Filling taus (skim) ..." << std::endl;}
 
   // Get list of tau collection names
   labels.clear();
@@ -312,8 +312,8 @@ void FillNTuple::Fill(const IPHCTree::MTEvent* minitree, IPHCTree::NTEvent* ntup
   // -------------------------------------
   // Jets
   // -------------------------------------
-  if (!skimJets) {if (verbose > 0)std::cout << "Filling jets (no skim) ..." << std::endl;}
-  else {if (verbose > 0) std::cout << "Filling jets (skim) ..." << std::endl;}
+  //if (!skimJets) {if (verbose > 0)std::cout << "Filling jets (no skim) ..." << std::endl;}
+  //else {if (verbose > 0) std::cout << "Filling jets (skim) ..." << std::endl;}
 
   // Get list of jet collection names
   labels.clear();
@@ -354,8 +354,8 @@ void FillNTuple::Fill(const IPHCTree::MTEvent* minitree, IPHCTree::NTEvent* ntup
   // -------------------------------------
   // Met
   // -------------------------------------
-  if (!skimJets) {if (verbose > 0)std::cout << "Filling met (no skim) ..." << std::endl;}
-  else {if (verbose > 0) std::cout << "Filling met (skim) ..." << std::endl;}
+  //if (!skimJets) {if (verbose > 0)std::cout << "Filling met (no skim) ..." << std::endl;}
+  //else {if (verbose > 0) std::cout << "Filling met (skim) ..." << std::endl;}
 
   // Get list of met collection names
   labels.clear();
@@ -393,8 +393,8 @@ void FillNTuple::Fill(const IPHCTree::MTEvent* minitree, IPHCTree::NTEvent* ntup
   // -------------------------------------
   // Tracks
   // -------------------------------------
-  if (!skimTracks) {if (verbose > 0) std::cout << "Filling tracks (no skim) ..." << std::endl;}
-  else {if (verbose > 0) std::cout << "Filling tracks (skim) ..." << std::endl;}
+  //if (!skimTracks) {if (verbose > 0) std::cout << "Filling tracks (no skim) ..." << std::endl;}
+  //else {if (verbose > 0) std::cout << "Filling tracks (skim) ..." << std::endl;}
 
   // Get list of track collection names
   labels.clear();
@@ -434,8 +434,8 @@ void FillNTuple::Fill(const IPHCTree::MTEvent* minitree, IPHCTree::NTEvent* ntup
     // -------------------------------------
   // Vertices
   // -------------------------------------
-  if (!skimVertices) {if (verbose > 0) std::cout << "Filling vertices (no skim) ..." << std::endl;}
-  else {if (verbose > 0) std::cout << "Filling vertices (skim) ..." << std::endl;}
+  //if (!skimVertices) {if (verbose > 0) std::cout << "Filling vertices (no skim) ..." << std::endl;}
+  //else {if (verbose > 0) std::cout << "Filling vertices (skim) ..." << std::endl;}
 
   // Get list of vertex collection names
   labels.clear();
