@@ -1683,7 +1683,8 @@ void MiniTreeProducer::fillElectrons(edm::Event& iEvent,
                            patelec->py(),
                            patelec->pz(),
                            patelec->energy() );
-
+			   
+			   
     // Set electron vertex
     myelec->vertex.SetXYZ( patelec->vx(),
                            patelec->vy(),
@@ -1697,6 +1698,15 @@ void MiniTreeProducer::fillElectrons(edm::Event& iEvent,
 
     // is GSF electron ?
     myelec->isGsfElectron = patelec->gsfTrack().isNonnull();
+    if(patelec->gsfTrack().isNonnull()){
+    			   
+      myelec->p4Gsf.SetPxPyPzE(patelec->ecalDrivenMomentum(). px(),
+                           patelec->ecalDrivenMomentum(). py(),
+                           patelec->ecalDrivenMomentum(). pz(),
+                           patelec->ecalDrivenMomentum(). energy() );
+			   
+    }		   
+			   
 
     // ------------------ Isolation info -----------------------
 

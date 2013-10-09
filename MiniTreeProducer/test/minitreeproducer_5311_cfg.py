@@ -49,11 +49,17 @@ print options.useData
 
 if not options.useData :
     inputJetCorrLabel = ('AK5PFchs', ['L1FastJet', 'L2Relative', 'L3Absolute'])
-    print "in use data true"
     process.source.fileNames = [
         #'/store/mc/Summer12_DR53X/TTJets_MassiveBinDECAY_TuneZ2star_8TeV-madgraph-tauola/AODSIM/PU_S10_START53_V7C-v1/00000/FE7C71D8-DB25-E211-A93B-0025901D4C74.root' 
-    'file:000C5D15-AB1A-E211-8BDE-00215E22053A.root',
-    'file:0010005A-421A-E211-9E3C-E41F13181DA4.root'
+    #'file:000C5D15-AB1A-E211-8BDE-00215E22053A.root',
+    #'file:0010005A-421A-E211-9E3C-E41F13181DA4.root'
+    'file:ZjetsSynchro/70300E2E-27D2-E111-92BD-001E67397AE4.root',
+    'file:ZjetsSynchro/7041870B-D3D2-E111-8CFE-001E67397008.root',
+    'file:ZjetsSynchro/70B638CE-C6D2-E111-8430-003048673F0A.root',
+    'file:ZjetsSynchro/70CC5B25-C3D2-E111-85A7-001E6739751C.root',
+    'file:ZjetsSynchro/70EA5873-5AD2-E111-AE4F-003048D462C4.root'
+    
+    
     ]
 
 else :
@@ -93,7 +99,8 @@ if options.useData :
         process.GlobalTag.globaltag = cms.string( options.globalTag )
 else :
     if options.globalTag is '':
-        process.GlobalTag.globaltag = cms.string( 'START53_V20::All' )
+        process.GlobalTag.globaltag = cms.string( 'START53_V20::All' ) #V20 should be used
+        #process.GlobalTag.globaltag = cms.string( 'START53_V7G::All' ) #V20 should be used
     else:
         process.GlobalTag.globaltag = cms.string( options.globalTag )
 
@@ -112,7 +119,9 @@ from PhysicsTools.PatAlgos.tools.pfTools import *
 postfix = "PFlow"
 usePF2PAT(process,runPF2PAT=True, jetAlgo='AK5', runOnMC=not options.useData, postfix=postfix,
 	  jetCorrections=inputJetCorrLabel, pvCollection=cms.InputTag('goodOfflinePrimaryVertices'), typeIMetCorrections=True)
+
 #useGsfElectrons(process,postfix,dR="03")
+
 
 
 ####################################
@@ -199,7 +208,7 @@ process.patPF2PATSequencePFlow += process.patConversionsPFlow
 
 switchJetCollection(process,cms.InputTag('ak5PFJets'),
 		    doJTA        = False,
-		    doBTagging   = False,
+		    doBTagging   = True,
 		    jetCorrLabel = inputJetCorrLabel,
 		    doType1MET   = True,
 		    genJetCollection=cms.InputTag("ak5GenJetsNoNu"),
@@ -207,7 +216,7 @@ switchJetCollection(process,cms.InputTag('ak5PFJets'),
 		    )
 		    
 process.load("JetMETCorrections.Type1MET.pfMETCorrectionType0_cfi")
-process.pfType1CorrectedMet.applyType0Corrections = cms.bool(False)
+process.pfType1CorrectedMet.applyType0Corrections = cms.bool(True)
 process.pfType1CorrectedMet.srcType1Corrections = cms.VInputTag(
     cms.InputTag('pfMETcorrType0'),
     cms.InputTag('pfJetMETcorr', 'type1')        
@@ -578,8 +587,9 @@ process.p = cms.Path(
 )
 
 
-process.out.outputCommands = cms.untracked.vstring('drop *',
-                                                   'keep IPHCTreeMTEvent_*_*_*',
-                                                   'keep *_MiniTreeSkimming_*_*')
+process.out.outputCommands = cms.untracked.vstring('drop *')#,
+                                                   #'keep IPHCTreeMTEvent_*_*_*',
+                                                   #'keep *_MiniTreeSkimming_*_*')
 
 
+process.MessageLogger.cerr.FwkReport.reportEvery = 100
