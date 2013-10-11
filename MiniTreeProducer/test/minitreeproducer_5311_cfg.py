@@ -35,7 +35,7 @@ options.register ('runOnFastSim',
                   VarParsing.varType.int,
                   "Option needed to run on fastsim.")
 
-
+options.parseArguments()                  
 
 print options.useData 
 print options.useData 
